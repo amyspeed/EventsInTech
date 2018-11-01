@@ -1,9 +1,6 @@
 'use strict';
 //Link to meetup & Eventbrite APIs
-const meetURL='';
-const meetKey='';
-
-const ebURL='https://www.eventbriteapi.com/v3/events/search/?categories=102';
+const ebUrlEndPt='https://www.eventbriteapi.com/v3/events/search/?categories=102';
 const ebOAuth='RH6RBMUD3MXBQB2TJWDA';
 //params:
 //sort_by=date
@@ -21,6 +18,9 @@ const ebOAuth='RH6RBMUD3MXBQB2TJWDA';
 //events.url (for link)
 //events.start.local
 //events.end.local
+
+const meetUrlEndPt='';
+const meetKey='';
 
 //Link to News:
 const newsURL = 'https://newsapi.org/v2/top-headlines?country=us&category=technology&apiKey=9d728f0139044cf3a54a15e546d1851e';
@@ -59,7 +59,6 @@ function handleEnter() {
 function appendHome() {
     //Append home (search) page
     $('main').append(homePage());
-    console.log('appendHome');
 }
 
 function homePage(){
@@ -133,8 +132,47 @@ function handleSubmit(){
     event.preventDefault;
     //Send to Results or No-Results
     //appendNoResults();
-    appendResults();
+    fetchEBInfo();
   })
+}
+
+//Fetch EB info
+function fetchEBInfo(queryZip, queryWhen, queryDate){
+  const paramsEB = {
+    'sort_by': 'date',
+    'location.address': 78704,//replace with queryZip,
+    'location.within': '100mi',
+    'categories': 102, //science and technology
+    'start_date.keyword': 'this_week',//replace with queryWhen,
+//Keyword options are "this_week", "next_week", "this_weekend", "next_month", "this_month", "tomorrow", "today"
+    //'start_date.range_start': 'YYYY-MM-DDThh:mm:ss',//replace with queryDate,
+    token: ebOAuth,
+  };
+    const queryStringEB = formatEBParams(paramsEB)
+    const urlEB = ebUrlEndPt + '?' + queryStringEB;
+
+    console.log(urlEB);
+    appendResults();
+
+    //fetch(urlEB)
+    //  .then(responseEB => {
+     //   if (responseEB.ok) {
+     //     resturn responseEB.json();
+      //  }
+     //   throw new Error(responseEB.statusText);
+     // })
+     // .then(responseEBJson=> appendResults(responseEBJson));
+      //.catch(errEB => {
+        //work on this later
+     // })
+
+}
+
+//string EB URL together
+function formatEBParams(paramsEB) {
+  const queryItems = Object.keys(paramsEB)
+    .map(token => `${encodeURIComponent(token)}=${encodeURIComponent(paramsEB[token])}`)
+  return queryItems.join('&');  
 }
 
 function appendNoResults(){
@@ -160,7 +198,6 @@ function appendResults(){
   $('.home').remove();
   //Reveal results page.
   $('main').append(results());
-  console.log('appendResults');
 }
 
 function results(){
