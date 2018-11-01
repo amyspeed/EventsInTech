@@ -18,69 +18,6 @@
           <input id="enter-app" type="submit" value="Let's go!">
         </form>  
       </div>
-
-      <div role="container" class="home<!-- hidden-->">
-        <header>
-          <h2>Where and When?</h2>
-        </header>
-        <form id="main-form">
-          <label for="select-location">Select your location</label>
-          <select id="select-location">
-            <option value="">--Choose one--</option>
-            <option value="78704">Austin</option>
-            <option value="94016">San Francisco</option>
-            <option value="10001">New York City</option>
-            <option value="">Other</option>
-          </select>
-
-          <label for="location-other">or input a 5-digit zip code</label>
-          <input id="location-other" type="number" maxlength=5 minlength=5 placeholder="Zip code">
-
-          <legend for="select-date">When?</legend>
-          <select id="select-date">
-            <option value="">--Choose one--</option>
-            <option value="today">Today</option>
-            <option value="Week">This Week</option>
-            <option value="">Other</option>
-          </select>  
-
-          <label for="date-other">select a date</label>
-          <input id="date-other" type="date">
-          <br>
-          <input type="submit" value="Show Me!" id="form-submit">
-        </form>  
-      </div>
-
-      <div role="container" class="no-results<!-- hidden-->">
-        <header>
-          <h2>Sorry! There are no events in the ${(value of zipcode)} area for ${(value of date)}</h2>
-        </header>  
-        <form class="go-home">
-          <button class="reset-search">Search Again</button>
-        </form>
-      </div>
-
-      <div role="container" class="results<!-- hidden-->">
-        <header>
-          <h2>Results</h2>
-        </header>
-        <section role="region" id="meetup">
-          <header><h3>Meetup Events</h3></header>
-          <h4><a href="" target="_blank">Example</a></h4>
-            <p>Description XXXXX</p>
-            <a href="" target="_blank">RSVP Here</a>
-            <a href="" target="_blank">Add to Google Calendar</a>
-        <section role="region" id="eventbrite">
-          <header><h3>Eventbrite Events</h3></header>
-          <h4><a href="" target="_blank">Example</a></h4>
-            <p>Description XXXXX</p>
-            <a href="" target="_blank">RSVP Here</a>
-            <a href="" target="_blank">Add to Google Calendar</a>
-        <form class="go-home">
-          <button class="reset-search">Search Again</button>
-        </form>
-      </div>
-
     </main>
     <script src="script.js"></script>
   </body>
