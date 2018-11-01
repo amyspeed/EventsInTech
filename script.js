@@ -7,13 +7,15 @@ function handleEnter() {
       //Remove landing page
       $('.landing').remove();
       appendHome();
+      handleSubmit();
+      handleNewSearch();
     });
   }
   
   function appendHome() {
       //Append home (search) page
       $('main').append(homePage());
-      handleSubmit();
+      console.log('appendHome');
   }
   
   function homePage(){
@@ -88,6 +90,7 @@ function handleEnter() {
     $('.home').remove();
     //Reveal results page.
     $('main').append(results());
+    console.log('appendResults');
   }
   
   function results(){
@@ -122,12 +125,5 @@ function handleEnter() {
       appendHome();
     })
   }
-  
-  
-      //Remove No Results page, append cleared home page
-  //Results? Append results page.
-      //(All external <a> links should be handled within HTML)
-      //Handle "Search Again"
-      //Remove Results page, append cleared home page
   
   handleEnter();    
