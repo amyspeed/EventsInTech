@@ -52,17 +52,14 @@ function handleEnter() {
     appendHome();
     handleSubmit();
     handleNewSearch();
-    revealDate();
+//    revealDate();
   });
 }
 
 function appendHome() {
     //Append home (search) page
-    $('main').append(homePage());
-}
-
-function homePage(){
-  return `<div role="container" class="home">
+    $('main').append(
+      `<div role="container" class="home">
         <header>
           <h2>Where and When?</h2>
         </header>
@@ -96,8 +93,7 @@ function homePage(){
           <br>
           <input type="submit" value="Show Me!" id="form-submit">
         </form>  
-      </div>
-`
+      </div>`)
 }
 
 //location: Handle select "other": show hidden zipcode input
@@ -112,9 +108,21 @@ function revealZipBox(){
   }) 
 }
 
+//location: Handle select "other": show hidden zipcode input
+//this function does not work yet:
+/*function revealZipBox(){
+    let openLocation='otherZip';
+    let selectLocation=$('#select-location').val();
+    $('#select-location').on('click', 'option', function(event){
+    if (openLocation===selectLocation){
+      $('#location-other').removeClass('hidden');
+    }
+  }) 
+}*/
+
 //Date: Handle select "other": show hidden date input
 //this function does not work yet:
-function revealDate(){
+/*function revealDate(){
     let openOption="enter-date";
     let selectOption=$('#select-date').val();
     if (openOption === selectOption){
@@ -123,7 +131,7 @@ function revealDate(){
       //or
       //$('.main-form').append(`<input id="date-other" type="date">`)
     }
-}
+}*/
 
 
 //Handle submit. Value of zipcode and date used to fetch Meetup and Eventbrite data.
@@ -152,16 +160,16 @@ function fetchEBInfo(queryZip, queryWhen, queryDate){
     const urlEB = ebUrlEndPt + '?' + queryStringEB;
 
     console.log(urlEB);
-    appendResults();
+//    appendResults();
 
-    //fetch(urlEB)
-    //  .then(responseEB => {
-     //   if (responseEB.ok) {
-     //     resturn responseEB.json();
-      //  }
-     //   throw new Error(responseEB.statusText);
-     // })
-     // .then(responseEBJson=> appendResults(responseEBJson));
+    fetch(urlEB)
+      .then(responseEB => {
+        if (responseEB.ok) {
+          return responseEB.json();
+        }
+        throw new Error(responseEB.statusText);
+      })
+      .then(responseEBJson=> appendResultsPg(responseEBJson));
       //.catch(errEB => {
         //work on this later
      // })
@@ -193,34 +201,26 @@ function noResults(){
       </div>`
 }
 
-function appendResults(){
+function appendResultsPg(responseEBJson){
   //Remove home page
   $('.home').remove();
-  //Reveal results page.
-  $('main').append(results());
-}
-
-function results(){
-  return `<div role="container" class="results">
+  //Generate results page.
+  $('main').append(`<div role="container" class="results">
         <header>
           <h2>Results</h2>
         </header>
         <section role="region" id="eventbrite">
           <header><h3>Eventbrite Events</h3></header>
-          <h4><a href="" target="_blank">Example</a></h4>
-            <p>Description XXXXX</p>
-            <a href="" target="_blank">RSVP Here</a>
-            <a href="" target="_blank">Add to Google Calendar</a>
+        </section  
+          
         <section role="region" id="meetup">
           <header><h3>Meetup Events</h3></header>
-          <h4><a href="" target="_blank">Example</a></h4>
-            <p>Description XXXXX</p>
-            <a href="" target="_blank">RSVP Here</a>
-            <a href="" target="_blank">Add to Google Calendar</a>
+        </section>  
         <form class="go-home">
           <button class="reset-search">Search Again</button>
         </form>
-      </div>`
+      </div>`);
+      console.log(responseEBJson.events[0].name.text);
 }
 
     //Handle "Search Again"
