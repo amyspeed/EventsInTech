@@ -53,7 +53,7 @@ function appendHome() {
             <option value="78704">Austin</option>
             <option value="94016">San Francisco</option>
             <option value="10001">New York City</option>
-            <option value="otherZip">Other</option>
+            <option value="">Other</option>
           </select>
 
           <label for="location-other">or input a 5-digit zip code</label>
@@ -136,7 +136,6 @@ function fetchEBInfo(queryZip, queryWithin, queryWhen, maxEBResults){
     const urlEB = ebUrlEndPt + '?' + queryStringEB;
 
     console.log(urlEB);
-//    appendResultsPg(queryZip, queryWithin, queryWhen, maxEBResults);
 
     fetch(urlEB)
       .then(responseEB => {
@@ -145,7 +144,7 @@ function fetchEBInfo(queryZip, queryWithin, queryWhen, maxEBResults){
         }
         throw new Error(responseEB.statusText);
       })
-      .then(responseEBJson=> appendResultsPg(responseEBJson, maxEBResults));
+      .then(responseEBJson=> checkResults(responseEBJson, maxEBResults, queryZip, queryWithin));
       //.catch(errEB => {
         //work on this later
      // })
@@ -158,17 +157,27 @@ function formatEBParams(paramsEB) {
   return queryItems.join('&');  
 }
 
-function appendNoResults(){
+function checkResults(responseEBJson, maxEBResults, queryZip, queryWithin){
+  if (responseEBJson.events.length > 0) {
+    appendResultsPg(responseEBJson, maxEBResults);
+  }
+  else {
+    appendNoResults(queryZip, queryWithin);
+  }
+}
+
+function appendNoResults(queryZip, queryWithin){
   //Remove home page
   $('.home').remove();
   //Reveal no-results page.
-  $('main').append(noResults());
+  $('main').append(noResults(queryZip, queryWithin));
 }
 
-function noResults(){
+function noResults(queryZip, queryWithin){
   return `<div role="container" class="no-results">
         <header>
-          <h2>Sorry! There are no events in the ${"(value of zipcode)"} area for ${"(value of date)"}</h2>
+          <h2>Sorry!</h2> 
+          <p>Eventbrite does not feature any events within ${queryWithin} of ${queryZip} for the time you selected. Try another search!</p>
         </header>  
         <form class="go-home">
           <button class="reset-search">Search Again</button>
