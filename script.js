@@ -57,7 +57,7 @@ function appendHome() {
           </select>
 
           <label for="location-other">or input a 5-digit zip code</label>
-          <input id="location-other" type="text" pattern="[0-9]" maxlength=5 minlength=5 placeholder="Zip code">
+          <input id="location-other" type="text" pattern="[0-9]" maxlength=5 minlength=5 placeholder="Postal Code" value="">
 
           <label for="within">Within</label>
           <select id="within" required>
@@ -101,12 +101,23 @@ function handleSubmit(){
   $('main').on('click', '#form-submit', function (event){
     event.preventDefault();
     //Send to Results or No-Results
-    const queryZip = $('#select-location').val();
+    const queryZip = chooseZip();
     const queryWithin = $('#within').val();
     const queryWhen = $('#select-date').val();
     const maxEBResults = $('#js-eb-max-results').val();
     fetchEBInfo(queryZip, queryWithin, queryWhen, maxEBResults);
   })
+}
+
+function chooseZip(){
+  let fillZip = $('#location-other').val();
+  let selectZip = $('#select-location').val();
+  if (fillZip === "") {
+    return selectZip;
+  }
+  else {
+    return fillZip;
+    }
 }
 
 //Fetch EB info
