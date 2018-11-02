@@ -30,7 +30,7 @@ function displayNews(responseJson){
 //Handle landing page submit to enter
 function handleEnter() {
   $('.landing').on('click', '#enter-app', function(event){
-    event.preventDefault;
+    event.preventDefault();
     //Remove landing page
     $('.landing').remove();
     appendHome();
@@ -99,7 +99,7 @@ function appendHome() {
 //Handle submit. Value of zipcode and date used to fetch Meetup and Eventbrite data.
 function handleSubmit(){
   $('main').on('click', '#form-submit', function (event){
-    event.preventDefault;
+    event.preventDefault();
     //Send to Results or No-Results
     const queryZip = $('#select-location').val();
     const queryWithin = $('#within').val();
@@ -125,20 +125,19 @@ function fetchEBInfo(queryZip, queryWithin, queryWhen, maxEBResults){
     const urlEB = ebUrlEndPt + '?' + queryStringEB;
 
     console.log(urlEB);
-    appendResultsPg(queryZip, queryWithin, queryWhen, maxEBResults);
+//    appendResultsPg(queryZip, queryWithin, queryWhen, maxEBResults);
 
-/*    fetch(urlEB)
+    fetch(urlEB)
       .then(responseEB => {
         if (responseEB.ok) {
           return responseEB.json();
         }
         throw new Error(responseEB.statusText);
       })
-      .then(responseEBJson=> appendResultsPg(responseEBJson, maxEBResults));*/
+      .then(responseEBJson=> appendResultsPg(responseEBJson, maxEBResults));
       //.catch(errEB => {
         //work on this later
      // })
-
 }
 
 //string EB URL together
@@ -166,8 +165,7 @@ function noResults(){
       </div>`
 }
 
-function appendResultsPg(queryZip, queryWithin, queryWhen, maxEBResults)/*(responseEBJson, maxEBResults)*/{
-  console.log(queryZip, queryWithin, queryWhen, maxEBResults);
+function appendResultsPg(responseEBJson, maxEBResults){
   //Remove home page
   $('.home').remove();
   //Generate results page.
@@ -186,12 +184,11 @@ function appendResultsPg(queryZip, queryWithin, queryWhen, maxEBResults)/*(respo
           <button class="reset-search">Search Again</button>
         </form>
       </div>`);
-  appendResults(queryZip, queryWithin, queryWhen, maxEBResults)/*(responseEBJson, maxEBResults)*/;
+  appendResults(responseEBJson, maxEBResults);
 }
 
-function appendResults(queryZip, queryWithin, queryWhen, maxEBResults)/*(responseEBJson, maxEBResults)*/ {
-  console.log(queryZip, queryWithin, queryWhen, maxEBResults);
-  /*for (let i=0; i < responseEBJson.events.length & i < maxEBResults; i++){
+function appendResults(responseEBJson, maxEBResults){
+  for (let i=0; i < responseEBJson.events.length & i < maxEBResults; i++){
   $('#eventbrite').append(
       `<h4><a href="${responseEBJson.events[i].url}" target="_blank">${responseEBJson.events[i].name.text}</a></h4>
             <p>${responseEBJson.events[i].start.local} to ${responseEBJson.events[i].end.local}</p>
@@ -199,7 +196,7 @@ function appendResults(queryZip, queryWithin, queryWhen, maxEBResults)/*(respons
             <p>${responseEBJson.events[i].description.text}</p>
             <a href="${responseEBJson.events[i].url}" target="_blank">${responseEBJson.events[i].vanity_url}</a>
             <a href="" target="_blank">Add to Google Calendar</a>`
-  )};*/
+  )};
 }
 
     //Handle "Search Again"
