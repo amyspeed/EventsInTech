@@ -57,12 +57,20 @@ function appendHome() {
           </select>
 
           <label for="location-other">or input a 5-digit zip code</label>
-          <input class="hidden" id="location-other" type="text" pattern="[0-9]" maxlength=5 minlength=5 placeholder="Zip code">
+          <input id="location-other" type="text" pattern="[0-9]" maxlength=5 minlength=5 placeholder="Zip code">
+
+          <label for="within">Within</label>
+          <select id="within" required>
+            <option value="5mi">5 miles</option>
+            <option value="10mi">10 miles</option>
+            <option value="20mi">25 miles</option>
+            <option value="50mi">50 miles</option>
+            <option value="100mi">100 miles</option>
+          </select>  
 
           <legend for="select-date">When?</legend>
-          <select id="select-date">
+          <select id="select-date" required>
             <option value="null">--Choose one--</option>
-            <option value="null">Any Time!</option>
             <option value="this_month">This Month</option>
             <option value="next_month">Next Month</option>
             <option value="this_week">This Week</option>
@@ -70,10 +78,7 @@ function appendHome() {
             <option value="this_weekend">This Weekend</option>
             <option value="today">Today</option>
             <option value="tomorrow">Tomorrow</option>
-            <option value="enter-date">Enter Date</option>
           </select>  
-
-          <input class="hidden" id="date-other" type="date">
           <br>
           
           <p>How many listing?</p>
@@ -96,21 +101,23 @@ function handleSubmit(){
   $('main').on('click', '#form-submit', function (event){
     event.preventDefault;
     //Send to Results or No-Results
-    //appendNoResults();
     const maxEBResults = $('#js-eb-max-results').val();
-    console.log(maxEBResults);
-    fetchEBInfo(1, 2, 3, maxEBResults);
+    const queryZip = $('#select-location').val();
+    const queryWithin = $('#within').val();
+    const queryWhen = $('#select-date').val();
+    fetchEBInfo(maxEBResults, queryZip, queryWithin, queryWhen);
   })
 }
 
 //Fetch EB info
-function fetchEBInfo(queryZip, queryWithin, queryWhen, maxEBResults){
+function fetchEBInfo(maxEBResults, queryZip, queryWithin, queryWhen){
+  console.log(maxEBResults, queryZip, queryWithin, queryWhen);
   const paramsEB = {
     'sort_by': 'date',
-    'location.address': 78704,//replace with queryZip,
-    'location.within': '100mi',//queryWithin
+    'location.address': queryZip,
+    'location.within': queryWithin,
     'categories': 102, //science and technology
-    'start_date.keyword': 'this_week',//replace with queryWhen,
+    'start_date.keyword': queryWhen,
 //Keyword options are "this_week", "next_week", "this_weekend", "next_month", "this_month", "tomorrow", "today"
     token: ebOAuth,
   };
@@ -118,16 +125,16 @@ function fetchEBInfo(queryZip, queryWithin, queryWhen, maxEBResults){
     const urlEB = ebUrlEndPt + '?' + queryStringEB;
 
     console.log(urlEB);
-//    appendResults();
+    appendResultsPg();
 
-    fetch(urlEB)
+/*    fetch(urlEB)
       .then(responseEB => {
         if (responseEB.ok) {
           return responseEB.json();
         }
         throw new Error(responseEB.statusText);
       })
-      .then(responseEBJson=> appendResultsPg(responseEBJson, maxEBResults));
+      .then(responseEBJson=> appendResultsPg(maxEBResults, responseEBJson));*/
       //.catch(errEB => {
         //work on this later
      // })
@@ -159,7 +166,7 @@ function noResults(){
       </div>`
 }
 
-function appendResultsPg(responseEBJson, maxEBResults){
+function appendResultsPg(/*maxEBResults, responseEBJson*/){
   //Remove home page
   $('.home').remove();
   //Generate results page.
@@ -178,12 +185,11 @@ function appendResultsPg(responseEBJson, maxEBResults){
           <button class="reset-search">Search Again</button>
         </form>
       </div>`);
-  appendResults(responseEBJson, maxEBResults);
+//  appendResults(maxEBResults, responseEBJson);
 }
 
-function appendResults(responseEBJson, maxEBResults) {
-  console.log(maxEBResults);
-  for (let i=0; i < responseEBJson.events.length && i < maxEBResults; i++){
+/*function appendResults(maxEBResults, responseEBJson) {
+  for (let i=0; i < responseEBJson.events.length & i < maxEBResults; i++){
   $('#eventbrite').append(
       `<h4><a href="${responseEBJson.events[i].url}" target="_blank">${responseEBJson.events[i].name.text}</a></h4>
             <p>${responseEBJson.events[i].start.local} to ${responseEBJson.events[i].end.local}</p>
@@ -192,7 +198,7 @@ function appendResults(responseEBJson, maxEBResults) {
             <a href="${responseEBJson.events[i].url}" target="_blank">${responseEBJson.events[i].vanity_url}</a>
             <a href="" target="_blank">Add to Google Calendar</a>`
   )};
-}
+}*/
 
     //Handle "Search Again"
 function handleNewSearch(){
