@@ -220,7 +220,13 @@ function appendResultsPg(responseEBJson){
           <button class="reset-search">Search Again</button>
         </form>
       </div>`);
-      console.log(responseEBJson.events[0].name.text);
+  appendResults(responseEBJson);
+}
+
+function appendResults(responseEBJson) {
+  console.log(responseEBJson.events[0].name.text);
+  $('#eventbrite').append(
+      `<h4><a href="${responseEBJson.events[0].url}" target="_blank">${responseEBJson.events[0].name.text}</a></h4>`)
 }
 
     //Handle "Search Again"
