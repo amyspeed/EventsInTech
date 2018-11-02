@@ -50,14 +50,20 @@ function appendHome() {
           <label for="select-location">Select your location</label>
           <select id="select-location" required>
             <option value="">--Choose one--</option>
-            <option value="78704">Austin</option>
-            <option value="94016">San Francisco</option>
-            <option value="10001">New York City</option>
-            <option value="">Other</option>
+            <option value="Austin">Austin</option>
+            <option value="Boston">Boston</option>
+            <option value="Dallas">Dallas</option>
+            <option value="Denver">Denver</option>
+            <option value="Los Angeles">Los Angeles</option>
+            <option value="New York City">New York City</option>
+            <option value="San Francisco">San Francisco</option>
+            <option value="Seattle">Seattle</option>
+            <option value="Washington, DC">Washington, DC</option>
+            <option value="">Other...</option>
           </select>
 
-          <label for="location-other">or input a 5-digit zip code</label>
-          <input id="location-other" type="text" pattern="[0-9]" maxlength=5 minlength=5 placeholder="Postal Code" value="">
+          <label for="location-other">or input a 5-digit zip code, city, or address</label>
+          <input id="location-other" type="text" placeholder="e.g. 90210" value="">
 
           <label for="within">Within</label>
           <select id="within" required>
@@ -101,31 +107,31 @@ function handleSubmit(){
   $('main').on('click', '#form-submit', function (event){
     event.preventDefault();
     //Send to Results or No-Results
-    const queryZip = chooseZip();
+    const queryWhere = chooseLoc();
     const queryWithin = $('#within').val();
     const queryWhen = $('#select-date').val();
     const maxEBResults = $('#js-eb-max-results').val();
-    fetchEBInfo(queryZip, queryWithin, queryWhen, maxEBResults);
+    fetchEBInfo(queryWhere, queryWithin, queryWhen, maxEBResults);
   })
 }
 
-function chooseZip(){
-  let fillZip = $('#location-other').val();
-  let selectZip = $('#select-location').val();
-  if (fillZip === "") {
-    return selectZip;
+function chooseLoc(){
+  let fillWhere = $('#location-other').val();
+  let selectWhere = $('#select-location').val();
+  if (fillWhere === "") {
+    return selectWhere;
   }
   else {
-    return fillZip;
+    return fillWhere;
     }
 }
 
 //Fetch EB info
-function fetchEBInfo(queryZip, queryWithin, queryWhen, maxEBResults){
-  console.log(queryZip, queryWithin, queryWhen, maxEBResults);
+function fetchEBInfo(queryWhere, queryWithin, queryWhen, maxEBResults){
+  console.log(queryWhere, queryWithin, queryWhen, maxEBResults);
   const paramsEB = {
     'sort_by': 'date',
-    'location.address': queryZip,
+    'location.address': queryWhere,
     'location.within': queryWithin,
     'categories': 102, //science and technology
     'start_date.keyword': queryWhen,
@@ -144,7 +150,7 @@ function fetchEBInfo(queryZip, queryWithin, queryWhen, maxEBResults){
         }
         throw new Error(responseEB.statusText);
       })
-      .then(responseEBJson=> checkResults(responseEBJson, maxEBResults, queryZip, queryWithin));
+      .then(responseEBJson=> checkResults(responseEBJson, maxEBResults, queryWhere, queryWithin));
       //.catch(errEB => {
         //work on this later
      // })
@@ -157,27 +163,27 @@ function formatEBParams(paramsEB) {
   return queryItems.join('&');  
 }
 
-function checkResults(responseEBJson, maxEBResults, queryZip, queryWithin){
+function checkResults(responseEBJson, maxEBResults, queryWhere, queryWithin){
   if (responseEBJson.events.length > 0) {
     appendResultsPg(responseEBJson, maxEBResults);
   }
   else {
-    appendNoResults(queryZip, queryWithin);
+    appendNoResults(queryWhere, queryWithin);
   }
 }
 
-function appendNoResults(queryZip, queryWithin){
+function appendNoResults(queryWhere, queryWithin){
   //Remove home page
   $('.home').remove();
   //Reveal no-results page.
-  $('main').append(noResults(queryZip, queryWithin));
+  $('main').append(noResults(queryWhere, queryWithin));
 }
 
-function noResults(queryZip, queryWithin){
+function noResults(queryWhere, queryWithin){
   return `<div role="container" class="no-results">
         <header>
           <h2>Sorry!</h2> 
-          <p>Eventbrite does not feature any events within ${queryWithin} of ${queryZip} for the time you selected. Try another search!</p>
+          <p>Eventbrite does not feature any events within ${queryWithin} of ${queryWhere} for the time you selected. Try another search!</p>
         </header>  
         <form class="go-home">
           <button class="reset-search">Search Again</button>
@@ -190,6 +196,11 @@ function appendResultsPg(responseEBJson, maxEBResults){
   $('.home').remove();
   //Generate results page.
   $('main').append(`<div role="container" class="results">
+        <nav role="navigation">
+          <form class="go-home">
+            <button class="reset-search">Search Again</button>
+          </form>
+        </nav>  
         <header>
           <h2>Results</h2>
         </header>
