@@ -226,7 +226,12 @@ function appendResultsPg(responseEBJson){
 function appendResults(responseEBJson) {
   console.log(responseEBJson.events[0].name.text);
   $('#eventbrite').append(
-      `<h4><a href="${responseEBJson.events[0].url}" target="_blank">${responseEBJson.events[0].name.text}</a></h4>`)
+      `<h4><a href="${responseEBJson.events[0].url}" target="_blank">${responseEBJson.events[0].name.text}</a></h4>
+            <p>${responseEBJson.events[0].start.local} to ${responseEBJson.events[0].end.local}</p>
+             <img alt="event log" src="${responseEBJson.events[0].logo.original.url}">
+            <p>${responseEBJson.events[0].description.text}</p>
+            <a href="${responseEBJson.events[0].url}" target="_blank">${responseEBJson.events[0].vanity_url}</a>
+            <a href="" target="_blank">Add to Google Calendar</a>`)
 }
 
     //Handle "Search Again"
