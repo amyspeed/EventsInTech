@@ -2,22 +2,6 @@
 //Link to meetup & Eventbrite APIs
 const ebUrlEndPt='https://www.eventbriteapi.com/v3/events/search/?categories=102';
 const ebOAuth='RH6RBMUD3MXBQB2TJWDA';
-//params:
-//sort_by=date
-//location.address=(zipcode)
-//location.within=100mi
-//categories=102 (science and technology)
-//start_date.keyword=this_week
-//Keyword options are "this_week", "next_week", "this_weekend", "next_month", "this_month", "tomorrow", "today"
-//start_date.range_start=
-//token=RH6RBMUD3MXBQB2TJWDA
-//return:
-//events.name.text
-//events.description.text
-//events.vanity_url (for show)
-//events.url (for link)
-//events.start.local
-//events.end.local
 
 const meetUrlEndPt='';
 const meetKey='';
@@ -52,7 +36,6 @@ function handleEnter() {
     appendHome();
     handleSubmit();
     handleNewSearch();
-//    revealDate();
   });
 }
 
@@ -84,6 +67,7 @@ function appendHome() {
             <option value="next_month">Next Month</option>
             <option value="this_week">This Week</option>
             <option value="next_week">Next Week</option>
+            <option value="this_weekend">This Weekend</option>
             <option value="today">Today</option>
             <option value="tomorrow">Tomorrow</option>
             <option value="enter-date">Enter Date</option>
@@ -91,47 +75,20 @@ function appendHome() {
 
           <input class="hidden" id="date-other" type="date">
           <br>
+          
+          <p>How many listing?</p>
+          <label for="eb-max-results">Eventbrite max:</label>
+          <input type="number" name="eb-max-results" id="js-eb-max-results" value="5">
+          <br>
+          <label for="mu-max-results">Meetup max:</label>
+          <input type="number" name="mu-max-results" id="js-mu-max-results" value="5">
+          <br>
+          
           <input type="submit" value="Show Me!" id="form-submit">
         </form>  
       </div>`)
 }
 
-//location: Handle select "other": show hidden zipcode input
-//this function does not work yet:
-function revealZipBox(){
-    let openLocation='otherZip';
-    let selectLocation=$('#select-location').val();
-    $('#select-location').on('click', 'option', function(event){
-    if (openLocation===selectLocation){
-      $('#location-other').removeClass('hidden');
-    }
-  }) 
-}
-
-//location: Handle select "other": show hidden zipcode input
-//this function does not work yet:
-/*function revealZipBox(){
-    let openLocation='otherZip';
-    let selectLocation=$('#select-location').val();
-    $('#select-location').on('click', 'option', function(event){
-    if (openLocation===selectLocation){
-      $('#location-other').removeClass('hidden');
-    }
-  }) 
-}*/
-
-//Date: Handle select "other": show hidden date input
-//this function does not work yet:
-/*function revealDate(){
-    let openOption="enter-date";
-    let selectOption=$('#select-date').val();
-    if (openOption === selectOption){
-      console.log('yes!');
-      $('#date-other').removeClass('hidden');
-      //or
-      //$('.main-form').append(`<input id="date-other" type="date">`)
-    }
-}*/
 
 
 //Handle submit. Value of zipcode and date used to fetch Meetup and Eventbrite data.
@@ -140,20 +97,21 @@ function handleSubmit(){
     event.preventDefault;
     //Send to Results or No-Results
     //appendNoResults();
-    fetchEBInfo();
+    const maxEBResults = $('#js-eb-max-results').val();
+    console.log(maxEBResults);
+    fetchEBInfo(1, 2, 3, maxEBResults);
   })
 }
 
 //Fetch EB info
-function fetchEBInfo(queryZip, queryWhen, queryDate){
+function fetchEBInfo(queryZip, queryWithin, queryWhen, maxEBResults){
   const paramsEB = {
     'sort_by': 'date',
     'location.address': 78704,//replace with queryZip,
-    'location.within': '100mi',
+    'location.within': '100mi',//queryWithin
     'categories': 102, //science and technology
     'start_date.keyword': 'this_week',//replace with queryWhen,
 //Keyword options are "this_week", "next_week", "this_weekend", "next_month", "this_month", "tomorrow", "today"
-    //'start_date.range_start': 'YYYY-MM-DDThh:mm:ss',//replace with queryDate,
     token: ebOAuth,
   };
     const queryStringEB = formatEBParams(paramsEB)
@@ -169,7 +127,7 @@ function fetchEBInfo(queryZip, queryWhen, queryDate){
         }
         throw new Error(responseEB.statusText);
       })
-      .then(responseEBJson=> appendResultsPg(responseEBJson));
+      .then(responseEBJson=> appendResultsPg(responseEBJson, maxEBResults));
       //.catch(errEB => {
         //work on this later
      // })
@@ -201,7 +159,7 @@ function noResults(){
       </div>`
 }
 
-function appendResultsPg(responseEBJson){
+function appendResultsPg(responseEBJson, maxEBResults){
   //Remove home page
   $('.home').remove();
   //Generate results page.
@@ -220,12 +178,12 @@ function appendResultsPg(responseEBJson){
           <button class="reset-search">Search Again</button>
         </form>
       </div>`);
-  appendResults(responseEBJson);
+  appendResults(responseEBJson, maxEBResults);
 }
 
-function appendResults(responseEBJson) {
-  console.log(responseEBJson.events[0].name.text);
-  for (let i=0; i < responseEBJson.events.length; i++){
+function appendResults(responseEBJson, maxEBResults) {
+  console.log(maxEBResults);
+  for (let i=0; i < responseEBJson.events.length && i < maxEBResults; i++){
   $('#eventbrite').append(
       `<h4><a href="${responseEBJson.events[i].url}" target="_blank">${responseEBJson.events[i].name.text}</a></h4>
             <p>${responseEBJson.events[i].start.local} to ${responseEBJson.events[i].end.local}</p>
