@@ -225,13 +225,15 @@ function appendResultsPg(responseEBJson){
 
 function appendResults(responseEBJson) {
   console.log(responseEBJson.events[0].name.text);
+  for (let i=0; i < responseEBJson.events.length; i++){
   $('#eventbrite').append(
-      `<h4><a href="${responseEBJson.events[0].url}" target="_blank">${responseEBJson.events[0].name.text}</a></h4>
-            <p>${responseEBJson.events[0].start.local} to ${responseEBJson.events[0].end.local}</p>
-             <img alt="event log" src="${responseEBJson.events[0].logo.original.url}">
-            <p>${responseEBJson.events[0].description.text}</p>
-            <a href="${responseEBJson.events[0].url}" target="_blank">${responseEBJson.events[0].vanity_url}</a>
-            <a href="" target="_blank">Add to Google Calendar</a>`)
+      `<h4><a href="${responseEBJson.events[i].url}" target="_blank">${responseEBJson.events[i].name.text}</a></h4>
+            <p>${responseEBJson.events[i].start.local} to ${responseEBJson.events[i].end.local}</p>
+             <img alt="event log" src="${responseEBJson.events[i].logo.original.url}">
+            <p>${responseEBJson.events[i].description.text}</p>
+            <a href="${responseEBJson.events[i].url}" target="_blank">${responseEBJson.events[i].vanity_url}</a>
+            <a href="" target="_blank">Add to Google Calendar</a>`
+  )};
 }
 
     //Handle "Search Again"
