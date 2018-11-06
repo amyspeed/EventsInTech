@@ -61,7 +61,8 @@ function appendHome() {
 
           <label for="location-other">or input a 5-digit zip code, city, or address</label>
           <input id="location-other" type="text" placeholder="e.g. 90210" value="">
-
+          
+          <br>
           <label for="within">Within</label>
           <select id="within" required>
             <option value="5mi">5 miles</option>
@@ -71,7 +72,7 @@ function appendHome() {
             <option value="100mi">100 miles</option>
           </select>  
 
-          <legend for="select-date">When?</legend>
+          <label for="select-date">When?</label>
           <select id="select-date" required>
             <option value="this_month">This Month</option>
             <option value="next_month">Next Month</option>
@@ -81,8 +82,15 @@ function appendHome() {
             <option value="today">Today</option>
             <option value="tomorrow">Tomorrow</option>
           </select>  
+        
+          <label for="sort-by">Sort by</label>
+          <select id="sort-by">
+            <option value="date">Date</option>
+            <option value="distance">Distance</option>
+            <option value="best">Best</option>
+          </select>
+
           <br>
-          
           <p>How many listing?</p>
           <label for="eb-max-results">Maximum results:</label>
           <input type="number" name="eb-max-results" id="js-eb-max-results" value="5">
@@ -100,12 +108,13 @@ function handleSubmit(){
   $('main').on('click', '#form-submit', function (event){
     event.preventDefault();
     //Send to Results or No-Results
+    const querySort = $('#sort-by').val();
     const queryWhere = chooseLoc();
     const queryWithin = $('#within').val();
     const queryWhen = $('#select-date').val();
     const maxEBResults = $('#js-eb-max-results').val();
     validateLoc(queryWhere);
-    fetchEBInfo(queryWhere, queryWithin, queryWhen, maxEBResults);
+    fetchEBInfo(querySort, queryWhere, queryWithin, queryWhen, maxEBResults);
   })
 }
 
@@ -127,10 +136,10 @@ function validateLoc(queryWhere){
 }
 
 //Fetch EB info
-function fetchEBInfo(queryWhere, queryWithin, queryWhen, maxEBResults){
-  console.log(queryWhere, queryWithin, queryWhen, maxEBResults);
+function fetchEBInfo(querySort, queryWhere, queryWithin, queryWhen, maxEBResults){
+  console.log(querySort, queryWhere, queryWithin, queryWhen, maxEBResults);
   const paramsEB = {
-    'sort_by': 'date',
+    'sort_by': querySort,
     'location.address': queryWhere,
     'location.within': queryWithin,
     'categories': 102, //science and technology
