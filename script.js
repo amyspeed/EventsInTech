@@ -73,7 +73,6 @@ function appendHome() {
 
           <legend for="select-date">When?</legend>
           <select id="select-date" required>
-            <option value="null">--Choose one--</option>
             <option value="this_month">This Month</option>
             <option value="next_month">Next Month</option>
             <option value="this_week">This Week</option>
