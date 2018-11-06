@@ -105,6 +105,7 @@ function handleSubmit(){
     const queryWithin = $('#within').val();
     const queryWhen = $('#select-date').val();
     const maxEBResults = $('#js-eb-max-results').val();
+    validateLoc(queryWhere);
     fetchEBInfo(queryWhere, queryWithin, queryWhen, maxEBResults);
   })
 }
@@ -118,6 +119,12 @@ function chooseLoc(){
   else {
     return fillWhere;
     }
+}
+
+function validateLoc(queryWhere){
+  if (queryWhere === "") {
+    alert('Oops! Please select or enter a location.');
+  }
 }
 
 //Fetch EB info
