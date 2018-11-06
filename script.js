@@ -226,15 +226,26 @@ function appendResultsPg(responseEBJson, maxEBResults){
 
 function appendResults(responseEBJson, maxEBResults){
   for (let i=0; i < responseEBJson.events.length & i < maxEBResults; i++){
+    const responseKey = responseEBJson.events[i];
+    const vanURL = handleVanUrl(responseKey);
+    console.log(responseKey.name.text);
   $('#eventbrite').append(
-      `<h4><a href="${responseEBJson.events[i].url}" target="_blank">${responseEBJson.events[i].name.text}</a></h4>
-            <p>${responseEBJson.events[i].start.local} to ${responseEBJson.events[i].end.local}</p>
-             <img alt="event log" src="${responseEBJson.events[i].logo.original.url}">
-            <p>${responseEBJson.events[i].description.text}</p>
-            <a href="${responseEBJson.events[i].url}" target="_blank">${responseEBJson.events[i].vanity_url}</a>
-            <a href="" target="_blank">Add to Google Calendar</a>`
+      `<h4><a href="${responseKey.url}" target="_blank">${responseKey.name.text}</a></h4>
+            <p>${responseKey.start.local} to ${responseKey.end.local}</p>
+             <img alt="event log" src="${responseKey.logo.original.url}">
+            <p>${responseKey.description.text}</p>
+            <a href="${responseKey.url}" target="_blank">${vanURL}</a>`
   )};
 }
+
+function handleVanUrl(responseKey){
+      if(responseKey.vanity_url == null){
+        return responseKey.url;
+      }
+      else {
+        return responseKey.vanity_url;
+      }
+}    
 
     //Handle "Search Again"
 function handleNewSearch(){
