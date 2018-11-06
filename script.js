@@ -231,7 +231,7 @@ function appendResults(responseEBJson, maxEBResults){
     console.log(responseKey.name.text);
   $('#eventbrite').append(
       `<h4><a href="${responseKey.url}" target="_blank">${responseKey.name.text}</a></h4>
-            <p>${responseKey.start.local} to ${responseKey.end.local}</p>
+            
              <img alt="event log" src="${responseKey.logo.original.url}">
             <p>${responseKey.description.text}</p>
             <a href="${responseKey.url}" target="_blank">${vanURL}</a>`
