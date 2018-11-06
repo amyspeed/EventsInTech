@@ -1,10 +1,7 @@
 'use strict';
-//Link to meetup & Eventbrite APIs
+//Link to Eventbrite API
 const ebUrlEndPt='https://www.eventbriteapi.com/v3/events/search/?categories=102';
 const ebOAuth='RH6RBMUD3MXBQB2TJWDA';
-
-const meetUrlEndPt='';
-const meetKey='';
 
 //Link to News:
 const newsURL = 'https://newsapi.org/v2/top-headlines?country=us&category=technology&apiKey=9d728f0139044cf3a54a15e546d1851e';
@@ -88,11 +85,8 @@ function appendHome() {
           <br>
           
           <p>How many listing?</p>
-          <label for="eb-max-results">Eventbrite max:</label>
+          <label for="eb-max-results">Maximum results:</label>
           <input type="number" name="eb-max-results" id="js-eb-max-results" value="5">
-          <br>
-          <label for="mu-max-results">Meetup max:</label>
-          <input type="number" name="mu-max-results" id="js-mu-max-results" value="5">
           <br>
           
           <input type="submit" value="Show Me!" id="form-submit">
@@ -205,12 +199,9 @@ function appendResultsPg(responseEBJson, maxEBResults){
           <h2>Results</h2>
         </header>
         <section role="region" id="eventbrite">
-          <header><h3>Eventbrite Events</h3></header>
+          <header><h3>Your Events from <a href="https://www.eventbrite.com/">Eventbrite.com</a></h3></header>
         </section  
-          
-        <section role="region" id="meetup">
-          <header><h3>Meetup Events</h3></header>
-        </section>  
+           
         <form class="go-home">
           <button class="reset-search">Search Again</button>
         </form>
