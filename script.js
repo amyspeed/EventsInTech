@@ -93,7 +93,6 @@ function appendHome() {
           </select>
 
           <br>
-          <p>How many listing?</p>
           <label for="eb-max-results">Maximum results:</label>
           <input type="number" name="eb-max-results" id="js-eb-max-results" value="5">
           <br>
