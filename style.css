@@ -2,6 +2,14 @@
   display: none;
 }
 
-img {
-  width: 500px;
+#error-message {
+  color: red;
+}
+
+.news-pic {
+  width: 100%
+}
+
+footer {
+  text-align: center;
 }

@@ -15,12 +15,17 @@ function fetchNews(responseJson){
 
 function displayNews(responseJson){
   for (let i=0; i<3; i++) {
-    $('.news').append(
-        `<h4><a href="${responseJson.articles[i].url}" target="_blank">${responseJson.articles[i].title}</a></h4>
-        <img class="news-pic" src="${responseJson.articles[i].urlToImage}">
-        <p>${responseJson.articles[i].description} <br>
-        By ${responseJson.articles[i].author}<br>
-        Source: ${responseJson.articles[i].source.name}</p>`
+    $('.news-post').append(
+        `<div class="col-4">
+            <div class="box">
+              <h4><a href="${responseJson.articles[i].url}" target="_blank">${responseJson.articles[i].title}</a></h4>
+              <img class="news-pic" src="${responseJson.articles[i].urlToImage}">
+              <p>${responseJson.articles[i].description} 
+              <br>
+              By ${responseJson.articles[i].author}<br>
+              Source: ${responseJson.articles[i].source.name}</p>
+            </div>
+          </div>`
     )};
 }
 
