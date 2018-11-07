@@ -10,7 +10,7 @@ function fetchNews(responseJson){
   fetch(newsURL)
     .then(response => response.json())
     .then(responseJson => displayNews(responseJson))
-  //  .catch(error => alert('Something went wrong. Try again later.'));
+    .catch(error => $('#error-message').text(`Sorry! Something went wrong in accessing the news.`));
 }
 
 function displayNews(responseJson){
@@ -62,8 +62,6 @@ function appendHome() {
           <label for="location-other">or input a 5-digit zip code, city, or address</label>
           <input id="location-other" type="text" placeholder="e.g. 90210" value="">
 
-          <p id="js-error-message" class="error-message"></p>
-          
           <br>
           <label for="within">Within</label>
           <select id="within" required>
