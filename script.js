@@ -61,6 +61,8 @@ function appendHome() {
 
           <label for="location-other">or input a 5-digit zip code, city, or address</label>
           <input id="location-other" type="text" placeholder="e.g. 90210" value="">
+
+          <p id="js-error-message" class="error-message"></p>
           
           <br>
           <label for="within">Within</label>
@@ -97,7 +99,7 @@ function appendHome() {
           <br>
           
           <input type="submit" value="Show Me!" id="form-submit">
-        </form>  
+        </form>
       </div>`)
 }
 
@@ -113,7 +115,6 @@ function handleSubmit(){
     const queryWithin = $('#within').val();
     const queryWhen = $('#select-date').val();
     const maxEBResults = $('#js-eb-max-results').val();
-    validateLoc(queryWhere);
     fetchEBInfo(querySort, queryWhere, queryWithin, queryWhen, maxEBResults);
   })
 }
@@ -127,12 +128,6 @@ function chooseLoc(){
   else {
     return fillWhere;
     }
-}
-
-function validateLoc(queryWhere){
-  if (queryWhere === "") {
-    alert('Oops! Please select or enter a location.');
-  }
 }
 
 //Fetch EB info
@@ -159,10 +154,10 @@ function fetchEBInfo(querySort, queryWhere, queryWithin, queryWhen, maxEBResults
         }
         throw new Error(responseEB.statusText);
       })
-      .then(responseEBJson=> checkResults(responseEBJson, maxEBResults, queryWhere, queryWithin));
-      //.catch(errEB => {
-        //work on this later
-     // })
+      .then(responseEBJson=> checkResults(responseEBJson, maxEBResults, queryWhere, queryWithin))
+      .catch(errEB => {
+        alert(`Oops! Please select or enter a different location. Your current location entry is creating this error message: ${errEB.message}.`);
+      });
 }
 
 //string EB URL together
