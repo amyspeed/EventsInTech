@@ -102,11 +102,10 @@ function appendHome() {
 
 
 
-//Handle submit. Value of zipcode and date used to fetch Meetup and Eventbrite data.
+//Handle submit.
 function handleSubmit(){
   $('main').on('click', '#form-submit', function (event){
     event.preventDefault();
-    //Send to Results or No-Results
     const querySort = $('#sort-by').val();
     const queryWhere = chooseLoc();
     const queryWithin = $('#within').val();
@@ -129,20 +128,16 @@ function chooseLoc(){
 
 //Fetch EB info
 function fetchEBInfo(querySort, queryWhere, queryWithin, queryWhen, maxEBResults){
-  console.log(querySort, queryWhere, queryWithin, queryWhen, maxEBResults);
   const paramsEB = {
     'sort_by': querySort,
     'location.address': queryWhere,
     'location.within': queryWithin,
     'categories': 102, //science and technology
     'start_date.keyword': queryWhen,
-//Keyword options are "this_week", "next_week", "this_weekend", "next_month", "this_month", "tomorrow", "today"
     token: ebOAuth,
   };
     const queryStringEB = formatEBParams(paramsEB)
     const urlEB = ebUrlEndPt + '?' + queryStringEB;
-
-    console.log(urlEB);
 
     fetch(urlEB)
       .then(responseEB => {
@@ -220,7 +215,6 @@ function appendResults(responseEBJson, maxEBResults){
   for (let i=0; i < responseEBJson.events.length & i < maxEBResults; i++){
     const responseKey = responseEBJson.events[i];
     const vanURL = handleVanUrl(responseKey);
-    console.log(responseKey.name.text);
   $('#eventbrite').append(
       `<h4><a href="${responseKey.url}" target="_blank">${responseKey.name.text}</a></h4>
             
