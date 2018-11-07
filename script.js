@@ -17,8 +17,8 @@ function displayNews(responseJson){
   for (let i=0; i<3; i++) {
     $('.news-post').append(
         `<div class="col-4">
-            <div class="box">
-              <h4><a href="${responseJson.articles[i].url}" target="_blank">${responseJson.articles[i].title}</a></h4>
+            <div class="box news-box">
+              <h4><a class="news-title" href="${responseJson.articles[i].url}" target="_blank">${responseJson.articles[i].title}</a></h4>
               <img class="news-pic" src="${responseJson.articles[i].urlToImage}">
               <p>${responseJson.articles[i].description} 
               <br>

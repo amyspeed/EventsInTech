@@ -1,9 +1,71 @@
+/*colors {
+  green-color: rgb(100, 213, 185);
+  darker: rgb(34, 164, 131);
+  purple-color: rgb(175, 107, 215);
+  darker: rgb(120, 43, 169);
+  yellow-color: rgb(255, 243, 119);
+}*/
+
+html {
+  background-color: rgb(226, 226, 226);
+}
+
+nav {
+  background-color: rgb(100, 213, 185);
+  border-bottom: 3px solid rgb(34, 164, 131);
+  font-size: 30px;
+  color: rgb(199, 248, 234);
+  position: relative;
+  padding-left: 20px;
+  height: 85px;
+}
+
+main {
+  background-color: white;
+  padding-top: 20px;
+}
+
+#enter-app {
+  background-color: rgb(255, 247, 158);
+  color: rgb(182, 148, 0);
+  border: 2px solid rgb(255, 241, 86);
+  border-radius: 10%;
+  margin-bottom: 20px;
+  margin-left: 20px;
+  font-size: 25px;
+  padding-left: 10px;
+}
+
+#enter-app:hover {
+  background-color: rgb(199, 248, 234);
+  border: 2px solid rgb(144, 232, 210);
+  color: rgb(34, 164, 131);
+}
+
 .hidden {
   display: none;
 }
 
 #error-message {
   color: red;
+}
+
+.news-header {
+  background-color: rgb(230, 202, 248);
+  color: rgb(120, 43, 169);
+}
+
+.news-post {
+  background-color: white(139, 138, 138);
+  color: black;
+}
+
+.news-title{
+  color: black;
+}
+
+.news-title:hover {
+  color: rgb(120, 43, 196);
 }
 
 .news-pic {
