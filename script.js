@@ -18,7 +18,7 @@ function displayNews(responseJson){
     $('.news-post').append(
         `<div class="col-4">
             <div class="box news-box">
-              <h4><a class="news-title" href="${responseJson.articles[i].url}" target="_blank">${responseJson.articles[i].title}</a></h4>
+              <h3><a class="news-title" href="${responseJson.articles[i].url}" target="_blank">${responseJson.articles[i].title}</a></h3>
               <img class="news-pic" src="${responseJson.articles[i].urlToImage}">
               <p>${responseJson.articles[i].description} 
               <br>
@@ -64,6 +64,7 @@ function appendHome() {
             <option value="">Other...</option>
           </select>
 
+          <br>
           <label for="location-other">or input a 5-digit zip code, city, or address</label>
           <input id="location-other" type="text" placeholder="e.g. 90210" value="">
 
@@ -77,6 +78,7 @@ function appendHome() {
             <option value="100mi">100 miles</option>
           </select>  
 
+          <br>
           <label for="select-date">When?</label>
           <select id="select-date" required>
             <option value="this_month">This Month</option>
@@ -87,7 +89,8 @@ function appendHome() {
             <option value="today">Today</option>
             <option value="tomorrow">Tomorrow</option>
           </select>  
-        
+          
+          <br>
           <label for="sort-by">Sort by</label>
           <select id="sort-by">
             <option value="date">Date</option>

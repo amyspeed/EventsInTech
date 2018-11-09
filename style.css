@@ -1,10 +1,8 @@
 html {
-  //background-color: rgb(133, 133, 133);
-  //background-image: url(https://wallpapertag.com/wallpaper/full/4/0/1/331988-tech-background-1920x1080-hd-for-mobile.jpg);
-  background-image: url(https://i2.wp.com/sellorelse.ogilvy.com/wp-content/uploads/2016/08/3d-world-new-technology-rocks.jpg);
-  //background-image: url(http://3.bp.blogspot.com/-ut60seMkzM4/TkqnVEFWyLI/AAAAAAAAIv4/XFf2GbaVimc/s1600/frozen_wave-wide+High+Resolution+Widescreen+Wallpapers.jpg);
+  background-image: url(https://ak9.picdn.net/shutterstock/videos/33098059/thumb/6.jpg?i10c=img);
   background-size: cover;
   background-attachment: fixed;
+  font-family: 'Prompt', sans-serif;
 }
 
 nav {
@@ -17,9 +15,8 @@ nav {
 
 #main-nav {
   padding-left: 30px;
-  background-color: rgb(13, 53, 102);
-  border-bottom: 5px solid rgb(20, 199, 150);
-  font-size: 30px;
+  background-image: linear-gradient(grey, black);
+  border-bottom: 3px solid rgb(191, 255, 88);
   color: rgb(255, 255, 255);
 }
 
@@ -43,7 +40,6 @@ nav {
 }
 
 main {
-  //background-color: rgb(211, 211, 211);
   margin-top: 70px;
 }
 
@@ -54,10 +50,23 @@ main {
   font-size: 20px;
 }
 
+h1 {
+  font-size: 35px;
+}
+
+h2 {
+  font-size: 20px;
+}
+
+h3 {
+  font-size: 15px;
+}
+
 #enter-app {
-  background-color: rgb(71, 201, 165);
-  border: 1px solid rgb(0, 135, 98);
+  font-family: 'Prompt', sans-serif;
+  background-image: linear-gradient(rgb(234, 255, 201), rgb(191, 255, 88));
   color: rgb(0, 0, 0);
+  border: 2px solid rgb(191, 255, 88);
   border-radius: 5px;
   margin-bottom: 20px;
   margin-left: 20px;
@@ -69,9 +78,9 @@ main {
 }
 
 #enter-app:hover {
-  background-color: rgb(230, 54, 197);
-  color: rgb(0, 0, 0);
-  border: 1px solid black;
+  background-image: linear-gradient(rgb(82, 82, 82), rgb(0, 0, 0));
+  border: 2px solid rgbrgb(191, 255, 88);
+  color: rgb(255, 255, 255);
 }
 
 .hidden {
@@ -83,8 +92,10 @@ main {
 }
 
 .news-header {
-  background-color: rgb(13, 53, 102);
-  color: rgb(255, 255, 255);
+  background-image: linear-gradient(rgb(238, 238, 238), rgb(184, 184, 184));
+  color: rgb(0, 0, 0);
+  border-bottom: 1px solid rgb(184, 184, 184);
+  border-top: 1px solid rgb(184, 184, 184);
 }
 
 .news-post {
@@ -93,16 +104,20 @@ main {
 }
 
 .news-title{
-  color: rgb(13, 53, 102);
+  color: rgb(0, 0, 0);
 }
 
 .news-title:hover {
-  color: rgb(1, 116, 102);
+  color: rgb(100, 100, 100);
 }
-
 
 .news-pic {
   width: 100%;
+}
+
+p {
+  font-family: 'EB Garamond', serif;
+  font-size: 16px;
 }
 
 footer {
@@ -116,5 +131,16 @@ footer {
 }
 
 #news-link:hover {
-  color: rgb(0, 0, 0);
+  color: rgb(191, 255, 88);
+}
+
+.home {
+  text-align: center;
+  margin-top: 120px;
+  margin-left: auto;
+  margin-right: auto;
+  width: 400px;
+  background-image: linear-gradient(rgb(255, 255, 255), rgb(155, 155, 155));
+  border: 1px solid rgb(155, 155, 155);
+  border-radius: 10px;
 }
