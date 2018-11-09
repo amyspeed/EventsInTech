@@ -197,8 +197,8 @@ function appendResultsPg(responseEBJson, maxEBResults){
   $('.home').remove();
   //Generate results page.
   $('main').append(`<div role="container" class="results">
-        <nav role="navigation">
-          <form class="go-home">
+        <nav role="navigation" >
+          <form class="go-home nav-form">
             <button class="reset-search">Search Again</button>
           </form>
         </nav>  
