@@ -103,7 +103,7 @@ function appendHome() {
           <input type="number" name="eb-max-results" id="js-eb-max-results" value="5">
           <br>
           
-          <input type="submit" value="Show Me!" id="form-submit">
+          <input class="go" type="submit" value="Show Me!" id="form-submit">
         </form>
       </div>`)
 }
@@ -189,7 +189,7 @@ function noResults(queryWhere, queryWithin){
           <h2>Sorry!</h2> 
           <p>Eventbrite does not feature any events within ${queryWithin} of ${queryWhere} for the time you selected. Try another search!</p>
         </header>  
-        <form class="go-home">
+        <form class="go-home go">
           <button class="reset-search">Search Again</button>
         </form>
       </div>`
@@ -202,7 +202,7 @@ function appendResultsPg(responseEBJson, maxEBResults){
   $('main').append(`<div role="container" class="results">
         <nav role="navigation" >
           <form class="go-home nav-form">
-            <button class="reset-search">Search Again</button>
+            <button class="reset-search go">Search Again</button>
           </form>
         </nav>  
         <header>
@@ -213,7 +213,7 @@ function appendResultsPg(responseEBJson, maxEBResults){
         </section  
            
         <form class="go-home">
-          <button class="reset-search">Search Again</button>
+          <button class="reset-search go">Search Again</button>
         </form>
       </div>`);
   appendResults(responseEBJson, maxEBResults);
