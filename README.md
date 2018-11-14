@@ -13,7 +13,7 @@ Users are introduced to the application and invited to enter. They can also see 
 Users are directed to the major search form of the application. They can choose from a long list of major cities or enter their own specific location. The user is required to enter a location in one of these two ways to submit the form. Otherwise, an error will be alerted. The user can also specify distance, time period, sorting parameters, and max results.
 
 ![Search Page](ScreenShots/Search.png)
-![Search Page](SreenShots/Dropdown.png)
+![Dropdown](ScreenShots/Dropdown.png)
 
 ## Results Page
 Powered by the eventbrite API, events in the users' specified locations and times are appended to the page. Users can view a title, photo, truncated description, and a URL. They can link to the event in a new tab to take further action. The "Search Again!" buttons redirect to a cleared Search Page.
