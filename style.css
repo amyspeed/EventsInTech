@@ -127,15 +127,16 @@ footer {
 .home {
   text-align: center;
   margin-top: 120px;
-  margin-left: 15%;
-  margin-right: 15%;
+  margin-left: auto;
+  margin-right: auto;
+  max-width: 550px;
   background-image: linear-gradient(rgb(255, 255, 255), rgb(155, 155, 155));
   border: 1px solid rgb(155, 155, 155);
   border-radius: 10px;
 }
 
 #within, #select-date, #sort-by, #js-eb-max-results {
-  margin-top: 10px;
+  margin-top: 15px;
 }
 
 .search {
@@ -156,11 +157,14 @@ footer {
   color: white;
 }
 
-.results-contain {
-  background-color: rgba(255, 255, 255, 0.313);
-  border-bottom: 1px solid rgb(155, 155, 155);
-  border-right: 1px solid rgb(155, 155, 155);
-  border-left: 1px solid rgb(155, 155, 155);
+#eventbrite {
+  background-color: rgba(255, 255, 255, 0.428);
+  border-bottom: 1px solid rgb(191, 255, 88);
+  border-right: 1px solid rgb(191, 255, 88);
+  border-left: 1px solid rgb(191, 255, 88);
+  padding-bottom: 20px;
+  max-width: 1000px;
+  margin: auto;
 }
 
 .results-box {

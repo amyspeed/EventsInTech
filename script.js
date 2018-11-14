@@ -244,7 +244,8 @@ function appendResults(responseEBJson, maxEBResults){
     const responseKey = responseEBJson.events[i];
     const vanURL = handleVanUrl(responseKey);
   $('#eventbrite').append(
-      `<div class="col-12 results-contain">
+      `<div class="row">
+        <div class="col-12 results-contain">
           <div class="box results-box">
             <h4><a class="title" href="${responseKey.url}" target="_blank">${responseKey.name.text}</a></h4>
             
@@ -252,7 +253,8 @@ function appendResults(responseEBJson, maxEBResults){
             <p class="event-describe">${responseKey.description.text}</p>
             <p><a class="title" href="${responseKey.url}" target="_blank">${vanURL}</a></p>
           </div>
-        </div>`
+        </div>
+      </div>`
   )};
 }
 
