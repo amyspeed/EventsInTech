@@ -19,7 +19,7 @@ function displayNews(responseJson){
         `<div class="col-4">
             <div class="box news-box">
               <h3><a class="title" href="${responseJson.articles[i].url}" target="_blank">${responseJson.articles[i].title}</a></h3>
-              <img class="news-pic" src="${responseJson.articles[i].urlToImage}">
+              <img class="news-pic" src="${responseJson.articles[i].urlToImage}" alt="news image">
               <p>${responseJson.articles[i].description} 
               <br>
               By ${responseJson.articles[i].author}<br>
@@ -245,7 +245,7 @@ function appendResults(responseEBJson, maxEBResults){
     const vanURL = handleVanUrl(responseKey);
   $('#eventbrite').append(
       `<div class="row">
-        <div class="col-12 results-contain">
+        <div class="col-12">
           <div class="box results-box">
             <h4><a class="title" href="${responseKey.url}" target="_blank">${responseKey.name.text}</a></h4>
             
