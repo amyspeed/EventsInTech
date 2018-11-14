@@ -26,10 +26,10 @@ Users are directed to this page if there are no events in their specified locati
 
 
 ## Technologies
-*HTML
-*CSS- ** Including media queries
-*JavaScript- ** Including the use of third-party APIs
-*jQuery
+* HTML
+* CSS- ** Including media queries
+* JavaScript- ** Including the use of third-party APIs
+* jQuery
 
 ## Author
 Amy Speed-Henley
