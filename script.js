@@ -69,7 +69,7 @@ function appendHome() {
                 <option value="Oakland">Oakland</option>
                 <option value="Orlando">Orlando</option>
                 <option value="Philadelphia">Philadelphia</option>
-                <option value="Pheonix">Pheonix</option>
+                <option value="Phoenix">Phoenix</option>
                 <option value="San Francisco">San Francisco</option>
                 <option value="Seattle">Seattle</option>
                 <option value="">Other...</option>
