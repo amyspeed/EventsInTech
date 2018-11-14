@@ -26,7 +26,7 @@ nav {
 
 .nav-form {
   position: absolute;
-  right: 50px;
+  right: 25px;
   top: 20px;
 }
 
@@ -56,7 +56,7 @@ main {
 }
 
 h1 {
-  font-size: 35px;
+  font-size: 30px;
 }
 
 h2 {
@@ -77,10 +77,6 @@ h3 {
   padding-right: 20px;
 }
 
-.hidden {
-  display: none;
-}
-
 #error-message {
   color: red;
 }
@@ -97,11 +93,11 @@ h3 {
   color: black;
 }
 
-.news-title{
+.title{
   color: rgb(0, 0, 0);
 }
 
-.news-title:hover {
+.title:hover {
   color: rgb(100, 100, 100);
 }
 
@@ -138,6 +134,28 @@ footer {
   border-radius: 10px;
 }
 
+#within, #select-date, #sort-by, #js-eb-max-results {
+  margin-top: 10px;
+}
+
+.search {
+  margin-top: 25px;
+  margin-bottom: 30px;
+  font-size: 15px;
+  padding-top: 3px;
+  padding-bottom: 3px;
+  padding-left: 20px;
+  padding-right: 20px;
+}
+
+#eb-link {
+  color: black;
+}
+
+#eb-link:hover {
+  color: white;
+}
+
 .results-contain {
   background-color: rgba(255, 255, 255, 0.313);
   border-bottom: 1px solid rgb(155, 155, 155);
@@ -168,4 +186,8 @@ footer {
 
 .bottom-button {
   margin-top: 5px;
+}
+
+.no-result {
+  text-align: center;
 }

@@ -45,3 +45,15 @@
     width: 100%
   }
 }
+
+/*Hide Nav button for extra small screens*/
+.hidden {
+    display: none;
+  }
+
+/*display Nav Button*/
+@media only screen and (min-width: 375px) {
+  .hidden {
+    display: inline-block;
+  }
+}

@@ -18,7 +18,7 @@ function displayNews(responseJson){
     $('.news-post').append(
         `<div class="col-4">
             <div class="box news-box">
-              <h3><a class="news-title" href="${responseJson.articles[i].url}" target="_blank">${responseJson.articles[i].title}</a></h3>
+              <h3><a class="title" href="${responseJson.articles[i].url}" target="_blank">${responseJson.articles[i].title}</a></h3>
               <img class="news-pic" src="${responseJson.articles[i].urlToImage}">
               <p>${responseJson.articles[i].description} 
               <br>
@@ -53,20 +53,30 @@ function appendHome() {
              <label for="select-location">Select your location</label>
              <select id="select-location" required>
                 <option value="">--Choose one--</option>
+                <option value="Atlanta">Atlanta</option>
                 <option value="Austin">Austin</option>
                 <option value="Boston">Boston</option>
+                <option value="Boulder">Boulder</option>
+                <option value="Chicago">Chicago</option>
                 <option value="Dallas">Dallas</option>
                 <option value="Denver">Denver</option>
+                <option value="Detroit">Detroit</option>
+                <option value="Las Vegas">Las Vegas</option>
                 <option value="Los Angeles">Los Angeles</option>
+                <option value="Miami">Miami</option>
+                <option value="Minneapolis">Minneapolis</option>
                 <option value="New York City">New York City</option>
+                <option value="Oakland">Oakland</option>
+                <option value="Orlando">Orlando</option>
+                <option value="Philadelphia">Philadelphia</option>
+                <option value="Pheonix">Pheonix</option>
                 <option value="San Francisco">San Francisco</option>
                 <option value="Seattle">Seattle</option>
-                <option value="Washington, DC">Washington, DC</option>
                 <option value="">Other...</option>
               </select>
 
               <br>
-              <label for="location-other">or input a 5-digit zip code, city, or address</label>
+              <label for="location-other">or enter a 5-digit zip code, city, or address</label>
               <input id="location-other" type="text" placeholder="e.g. 90210" value="">
 
               <br>
@@ -104,7 +114,7 @@ function appendHome() {
              <input type="number" name="eb-max-results" id="js-eb-max-results" value="5">
              <br>
           
-              <input class="go" type="submit" value="Show Me!" id="form-submit">
+              <input class="go search" type="submit" value="Show Me!" id="form-submit">
             </form>
           </div>
       </div>`)
@@ -187,14 +197,18 @@ function appendNoResults(queryWhere, queryWithin){
 
 function noResults(queryWhere, queryWithin){
   return `<div role="container" class="no-results">
-        <header>
-          <h2>Sorry!</h2> 
-          <p>Eventbrite does not feature any events within ${queryWithin} of ${queryWhere} for the time you selected. Try another search!</p>
-        </header>  
-        <form class="go-home go">
-          <button class="reset-search">Search Again</button>
-        </form>
-      </div>`
+      <div class="row content no-result"
+        <div class="col-12">
+          <header>
+            <h2>Sorry!</h2> 
+            <p>Eventbrite does not feature any events within ${queryWithin} of ${queryWhere} for the time you selected. Try another search!</p>
+          </header>    
+          <form class="go-home bottom-form">
+           <button class="reset-search go bottom-button">Search Again</button>
+          </form>
+        </div>
+      </div>  
+    </div>`
 }
 
 function appendResultsPg(responseEBJson, maxEBResults){
@@ -203,7 +217,7 @@ function appendResultsPg(responseEBJson, maxEBResults){
   //Generate results page.
   $('main').append(
       `<div role="container" class="results">
-        <nav role="navigation">
+        <nav class="hidden" role="navigation">
           <form class="go-home nav-form">
             <button class="reset-search go">Search Again</button>
           </form>
@@ -212,7 +226,7 @@ function appendResultsPg(responseEBJson, maxEBResults){
           <div class="row banner">
             <div class="col-12">
               <header>
-                <h2>Your Results from <a href="https://www.eventbrite.com/">Eventbrite.com</a></h2>
+                <h2>Your Results from <a id="eb-link" target="_blank" href="https://www.eventbrite.com/">eventbrite</a></h2>
               </header>
             </div>
           </div>
@@ -232,11 +246,11 @@ function appendResults(responseEBJson, maxEBResults){
   $('#eventbrite').append(
       `<div class="col-12 results-contain">
           <div class="box results-box">
-            <h4><a href="${responseKey.url}" target="_blank">${responseKey.name.text}</a></h4>
+            <h4><a class="title" href="${responseKey.url}" target="_blank">${responseKey.name.text}</a></h4>
             
             <img alt="event logo" src="${responseKey.logo.original.url}">
             <p class="event-describe">${responseKey.description.text}</p>
-            <a href="${responseKey.url}" target="_blank">${vanURL}</a>
+            <p><a class="title" href="${responseKey.url}" target="_blank">${vanURL}</a></p>
           </div>
         </div>`
   )};
