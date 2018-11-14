@@ -44,67 +44,69 @@ function handleEnter() {
 function appendHome() {
     //Append home (search) page
     $('main').append(
-      `<div role="container" class="home">
-        <header>
-          <h2>Where and When?</h2>
-        </header>
-        <form id="main-form">
-          <label for="select-location">Select your location</label>
-          <select id="select-location" required>
-            <option value="">--Choose one--</option>
-            <option value="Austin">Austin</option>
-            <option value="Boston">Boston</option>
-            <option value="Dallas">Dallas</option>
-            <option value="Denver">Denver</option>
-            <option value="Los Angeles">Los Angeles</option>
-            <option value="New York City">New York City</option>
-            <option value="San Francisco">San Francisco</option>
-            <option value="Seattle">Seattle</option>
-            <option value="Washington, DC">Washington, DC</option>
-            <option value="">Other...</option>
-          </select>
+      `<div role="container" class="home row">
+          <div class="col-12">
+            <header>
+              <h2>Where and When?</h2>
+            </header>
+            <form id="main-form">
+             <label for="select-location">Select your location</label>
+             <select id="select-location" required>
+                <option value="">--Choose one--</option>
+                <option value="Austin">Austin</option>
+                <option value="Boston">Boston</option>
+                <option value="Dallas">Dallas</option>
+                <option value="Denver">Denver</option>
+                <option value="Los Angeles">Los Angeles</option>
+                <option value="New York City">New York City</option>
+                <option value="San Francisco">San Francisco</option>
+                <option value="Seattle">Seattle</option>
+                <option value="Washington, DC">Washington, DC</option>
+                <option value="">Other...</option>
+              </select>
 
-          <br>
-          <label for="location-other">or input a 5-digit zip code, city, or address</label>
-          <input id="location-other" type="text" placeholder="e.g. 90210" value="">
+              <br>
+              <label for="location-other">or input a 5-digit zip code, city, or address</label>
+              <input id="location-other" type="text" placeholder="e.g. 90210" value="">
 
-          <br>
-          <label for="within">Within</label>
-          <select id="within" required>
-            <option value="5mi">5 miles</option>
-            <option value="10mi">10 miles</option>
-            <option value="25mi">25 miles</option>
-            <option value="50mi">50 miles</option>
-            <option value="100mi">100 miles</option>
-          </select>  
+              <br>
+              <label for="within">Within</label>
+              <select id="within" required>
+                <option value="5mi">5 miles</option>
+                <option value="10mi">10 miles</option>
+                <option value="25mi">25 miles</option>
+                <option value="50mi">50 miles</option>
+               <option value="100mi">100 miles</option>
+              </select>  
 
-          <br>
-          <label for="select-date">When?</label>
-          <select id="select-date" required>
-            <option value="this_month">This Month</option>
-            <option value="next_month">Next Month</option>
-            <option value="this_week">This Week</option>
-            <option value="next_week">Next Week</option>
-            <option value="this_weekend">This Weekend</option>
-            <option value="today">Today</option>
-            <option value="tomorrow">Tomorrow</option>
-          </select>  
+              <br>
+              <label for="select-date">When?</label>
+              <select id="select-date" required>
+                <option value="this_month">This Month</option>
+                <option value="next_month">Next Month</option>
+                <option value="this_week">This Week</option>
+                <option value="next_week">Next Week</option>
+                <option value="this_weekend">This Weekend</option>
+                <option value="today">Today</option>
+                <option value="tomorrow">Tomorrow</option>
+              </select>  
           
-          <br>
-          <label for="sort-by">Sort by</label>
-          <select id="sort-by">
-            <option value="date">Date</option>
-            <option value="distance">Distance</option>
-            <option value="best">Best</option>
-          </select>
+              <br>
+              <label for="sort-by">Sort by</label>
+              <select id="sort-by">
+               <option value="date">Date</option>
+               <option value="distance">Distance</option>
+               <option value="best">Best</option>
+              </select>
 
-          <br>
-          <label for="eb-max-results">Maximum results:</label>
-          <input type="number" name="eb-max-results" id="js-eb-max-results" value="5">
-          <br>
+             <br>
+             <label for="eb-max-results">Maximum results:</label>
+             <input type="number" name="eb-max-results" id="js-eb-max-results" value="5">
+             <br>
           
-          <input class="go" type="submit" value="Show Me!" id="form-submit">
-        </form>
+              <input class="go" type="submit" value="Show Me!" id="form-submit">
+            </form>
+          </div>
       </div>`)
 }
 
@@ -199,21 +201,25 @@ function appendResultsPg(responseEBJson, maxEBResults){
   //Remove home page
   $('.home').remove();
   //Generate results page.
-  $('main').append(`<div role="container" class="results">
-        <nav role="navigation" >
+  $('main').append(
+      `<div role="container" class="results">
+        <nav role="navigation">
           <form class="go-home nav-form">
             <button class="reset-search go">Search Again</button>
           </form>
-        </nav>  
-        <header>
-          <h2>Results</h2>
-        </header>
-        <section role="region" id="eventbrite">
-          <header><h3>Your Events from <a href="https://www.eventbrite.com/">Eventbrite.com</a></h3></header>
-        </section  
-           
-        <form class="go-home">
-          <button class="reset-search go">Search Again</button>
+        </nav>
+        <section role="region" id="eventbrite">   
+          <div class="row banner">
+            <div class="col-12">
+              <header>
+                <h2>Your Results from <a href="https://www.eventbrite.com/">Eventbrite.com</a></h2>
+              </header>
+            </div>
+          </div>
+              
+        </section>
+        <form class="go-home bottom-form">
+        <button class="reset-search go bottom-button">Search Again</button>
         </form>
       </div>`);
   appendResults(responseEBJson, maxEBResults);
@@ -224,11 +230,15 @@ function appendResults(responseEBJson, maxEBResults){
     const responseKey = responseEBJson.events[i];
     const vanURL = handleVanUrl(responseKey);
   $('#eventbrite').append(
-      `<h4><a href="${responseKey.url}" target="_blank">${responseKey.name.text}</a></h4>
+      `<div class="col-12 results-contain">
+          <div class="box results-box">
+            <h4><a href="${responseKey.url}" target="_blank">${responseKey.name.text}</a></h4>
             
-             <img alt="event log" src="${responseKey.logo.original.url}">
-            <p>${responseKey.description.text}</p>
-            <a href="${responseKey.url}" target="_blank">${vanURL}</a>`
+            <img alt="event logo" src="${responseKey.logo.original.url}">
+            <p class="event-describe">${responseKey.description.text}</p>
+            <a href="${responseKey.url}" target="_blank">${vanURL}</a>
+          </div>
+        </div>`
   )};
 }
 
