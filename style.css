@@ -38,7 +38,7 @@ nav {
   border-radius: 5px;
 }
 
-.go:hover {
+.go:hover, .go:focus {
   background-image: linear-gradient(rgb(82, 82, 82), rgb(0, 0, 0));
   border: 2px solid rgbrgb(191, 255, 88);
   color: rgb(255, 255, 255);
@@ -97,7 +97,7 @@ h3 {
   color: rgb(0, 0, 0);
 }
 
-.title:hover {
+.title:hover, .title:focus {
   color: rgb(100, 100, 100);
 }
 
@@ -120,7 +120,7 @@ footer {
   color: white;
 }
 
-#news-link:hover {
+#news-link:hover, #news-link:focus {
   color: rgb(191, 255, 88);
 }
 
@@ -153,7 +153,7 @@ footer {
   color: black;
 }
 
-#eb-link:hover {
+#eb-link:hover, #eb-link:focus {
   color: white;
 }
 
