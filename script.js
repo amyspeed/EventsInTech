@@ -19,7 +19,7 @@ function displayNews(responseJson){
         `<div class="col-4">
             <div class="box news-box">
               <h3><a class="title" href="${responseJson.articles[i].url}" target="_blank">${responseJson.articles[i].title}</a></h3>
-              <img class="news-pic" src="${responseJson.articles[i].urlToImage}" alt="news image">
+              <img class="news-pic" src="${responseJson.articles[i].urlToImage}" alt="News Image" onerror="this.src='ScreenShots/technews.jpg';">
               <p>${responseJson.articles[i].description} 
               <br>
               By ${responseJson.articles[i].author}<br>
