@@ -2,7 +2,7 @@
 
 A discovery application. Users can search for live Science and Technology events in their area. 
 
-[See a live Preview Here](http://htmlpreview.github.io/?https://github.com/amyspeed/EventsInTech/blob/master/index.html)
+[See a live Preview Here](https://amyspeed.github.io/EventsInTech)
 
 ## Landing Page
 Users are introduced to the application and invited to enter. They can also see and link to three major technology news stories.
