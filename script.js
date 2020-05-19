@@ -18,7 +18,7 @@ function displayNews(responseJson){
     $('.news-post').append(
         `<div class="col-4">
             <div class="box news-box">
-              <h3><a class="title" href="${responseJson.articles[i].url}" target="_blank">${responseJson.articles[i].title}</a></h3>
+              <h3><a class="title" href="${responseJson.articles[i].url}" target="_blank" rel="noreferrer">${responseJson.articles[i].title}</a></h3>
               <img class="news-pic" src="${responseJson.articles[i].urlToImage}" alt="News Image" onerror="this.src='ScreenShots/technews.jpg';">
               <p>${responseJson.articles[i].description} 
               <br>
@@ -44,7 +44,7 @@ function handleEnter() {
 function appendHome() {
     //Append home (search) page
     $('main').append(
-      `<div role="container" class="home row">
+      `<div class="home row">
           <div class="col-12">
             <header>
               <h2>Where and When?</h2>
@@ -196,7 +196,7 @@ function appendNoResults(queryWhere, queryWithin){
 }
 
 function noResults(queryWhere, queryWithin){
-  return `<div role="container" class="no-results">
+  return `<div class="no-results">
       <div class="row content no-result"
         <div class="col-12">
           <header>
@@ -216,7 +216,7 @@ function appendResultsPg(responseEBJson, maxEBResults){
   $('.home').remove();
   //Generate results page.
   $('main').append(
-      `<div role="container" class="results">
+      `<div class="results">
         <nav class="hidden" role="navigation">
           <form class="go-home nav-form">
             <button class="reset-search go">Search Again</button>
@@ -226,7 +226,7 @@ function appendResultsPg(responseEBJson, maxEBResults){
           <div class="row banner">
             <div class="col-12">
               <header>
-                <h2>Your Results from <a id="eb-link" target="_blank" href="https://www.eventbrite.com/">eventbrite</a></h2>
+                <h2>Your Results from <a id="eb-link" target="_blank" rel="noreferrer" href="https://www.eventbrite.com/">eventbrite</a></h2>
               </header>
             </div>
           </div>
@@ -247,11 +247,11 @@ function appendResults(responseEBJson, maxEBResults){
       `<div class="row">
         <div class="col-12">
           <div class="box results-box">
-            <h4><a class="title" href="${responseKey.url}" target="_blank">${responseKey.name.text}</a></h4>
+            <h4><a class="title" href="${responseKey.url}" target="_blank" rel="noreferrer">${responseKey.name.text}</a></h4>
             
             <img alt="event logo" src="${responseKey.logo.original.url}">
             <p class="event-describe">${responseKey.description.text}</p>
-            <p><a class="title" href="${responseKey.url}" target="_blank">${vanURL}</a></p>
+            <p><a class="title" href="${responseKey.url}" target="_blank" rel="noreferrer">${vanURL}</a></p>
           </div>
         </div>
       </div>`
