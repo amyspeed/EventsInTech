@@ -1,13 +1,16 @@
 'use strict';
 //Link to Eventbrite API
 const ebUrlEndPt='https://www.eventbriteapi.com/v3/events/search/?categories=102';
-const ebOAuth='RH6RBMUD3MXBQB2TJWDA';
+const ebOAuth='E7WFKXN4XVG57TWC6HAB';
 
 //Link to News:
 const newsURL = 'https://newsapi.org/v2/top-headlines?country=us&category=technology&apiKey=9d728f0139044cf3a54a15e546d1851e';
 
+//Link to Proxy to avoid cors error
+const corsProxy = 'https://cors-anywhere.herokuapp.com/';
+
 function fetchNews(responseJson){
-  fetch(newsURL)
+  fetch(corsProxy + newsURL)
     .then(response => response.json())
     .then(responseJson => displayNews(responseJson))
     .catch(error => $('#error-message').text(`Sorry! Something went wrong in accessing the news.`));
@@ -148,28 +151,29 @@ function chooseLoc(){
 
 //Fetch EB info
 function fetchEBInfo(querySort, queryWhere, queryWithin, queryWhen, maxEBResults){
-  const paramsEB = {
-    'sort_by': querySort,
-    'location.address': queryWhere,
-    'location.within': queryWithin,
-    'categories': 102, //science and technology
-    'start_date.keyword': queryWhen,
-    token: ebOAuth,
-  };
-    const queryStringEB = formatEBParams(paramsEB)
-    const urlEB = ebUrlEndPt + '?' + queryStringEB;
+  alert('Oops! So sorry! "Event search" functionality has been deprecated from the eventbrite API.');
+  // const paramsEB = {
+  //   'sort_by': querySort,
+  //   'location.address': queryWhere,
+  //   'location.within': queryWithin,
+  //   'categories': 102, //science and technology
+  //   'start_date.keyword': queryWhen,
+  //   token: ebOAuth,
+  // };
+  //   const queryStringEB = formatEBParams(paramsEB)
+  //   const urlEB = ebUrlEndPt + '?' + queryStringEB;
 
-    fetch(urlEB)
-      .then(responseEB => {
-        if (responseEB.ok) {
-          return responseEB.json();
-        }
-        throw new Error(responseEB.statusText);
-      })
-      .then(responseEBJson=> checkResults(responseEBJson, maxEBResults, queryWhere, queryWithin))
-      .catch(errEB => {
-        alert(`Oops! Please select or enter a different location. Your current location entry is creating this error message: ${errEB.message}.`);
-      });
+  //   fetch(corsProxy + urlEB)
+  //     .then(responseEB => {
+  //       if (responseEB.ok) {
+  //         return responseEB.json();
+  //       }
+  //       throw new Error(responseEB.statusText);
+  //     })
+  //     .then(responseEBJson=> checkResults(responseEBJson, maxEBResults, queryWhere, queryWithin))
+  //     .catch(errEB => {
+  //       alert(`Oops! Please select or enter a different location. Your current location entry is creating this error message: ${errEB.message}.`);
+      // });
 }
 
 //string EB URL together
